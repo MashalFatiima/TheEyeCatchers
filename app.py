@@ -6,19 +6,66 @@ from model.model import load_model, predict_and_visualize
 from utils.preprocess import preprocess_image
 
 # Set Streamlit page configuration
-st.set_page_config(page_title="TheEyeCatchers", layout="centered")
+st.set_page_config(page_title="TheEyeCatchers", layout="centered", page_icon="🖼️")
+
+# Custom CSS for styling
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: black;
+        color: pink;
+    }
+    .title-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        color: pink;
+        font-size: 14px;
+        padding: 10px 0;
+        background-color: black;
+    }
+    img.logo {
+        width: 50px;
+        height: auto;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 # Load the model
-try:
-    model, class_names = load_model()
-except Exception as e:
-    st.error(f"Failed to load the model: {e}")
-    st.stop()
+model, class_names = load_model()
 
-# App title
-st.title("TheEyeCatchers: Diabetic Retinopathy Detection with Grad-CAM")
+# Title section with logo
+logo_path = "Logo.png"  # Path to your logo file
+if os.path.exists(logo_path):
+    with open(logo_path, "rb") as f:
+        logo_image = f.read()
+    logo_base64 = st.components.v1.html(
+        f"""
+        <div class="title-container">
+            <img src="data:image/png;base64,{logo_image}" class="logo">
+            <h1>TheEyeCatchers</h1>
+        </div>
+        <h2 style="text-align: center;">Diabetic Retinopathy Detection with Grad-CAM</h2>
+        """,
+        unsafe_allow_html,
+    )
+else:
+    st.error("Logo file not found. Please ensure it's placed in the correct directory.")
 
-# Upload image
+# File uploader
 uploaded_file = st.file_uploader("Upload an image for prediction", type=["jpg", "jpeg", "png"])
 
 if uploaded_file:
@@ -29,22 +76,29 @@ if uploaded_file:
 
     # Load and display the image
     image = Image.open(image_path).convert("RGB")
-    st.image(image, caption="Uploaded Image", use_column_width=True)
+    st.image(image, caption="Uploaded Image", use_container_width=True)
 
     # Preprocess the image
     input_tensor = preprocess_image(image)
 
     # Make prediction and generate Grad-CAM
-    try:
-        predicted_label, probabilities, grad_cam_image = predict_and_visualize(model, input_tensor, image_path, class_names)
+    predicted_label, _, grad_cam_image = predict_and_visualize(model, input_tensor, image_path, class_names)
 
-        # Display prediction results
-        st.subheader("Prediction:")
-        st.write(f"**Class:** {predicted_label}")
-        st.write(f"**Probabilities:** {probabilities}")
+    # Display prediction results
+    st.subheader("Prediction:")
+    prediction_text = "Diabetic Retinopathy Detected" if predicted_label == "DR" else "No Diabetic Retinopathy Detected"
+    st.write(f"**{prediction_text}**")
 
-        # Display Grad-CAM
-        st.subheader("Grad-CAM Visualization:")
-        st.image(grad_cam_image, caption="Grad-CAM Overlay", use_column_width=True)
-    except Exception as e:
-        st.error(f"Error during prediction: {e}")
+    # Display Grad-CAM
+    st.subheader("Grad-CAM Visualization:")
+    st.image(grad_cam_image, caption="Grad-CAM Overlay", use_container_width=True)
+
+# Footer
+st.markdown(
+    """
+    <div class="footer">
+        © Developed by Mashal, Fatima, and Maryam
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
