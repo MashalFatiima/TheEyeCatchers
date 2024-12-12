@@ -1,4 +1,7 @@
+streamlit
 torch
 torchvision
 Pillow
-streamlit
+numpy
+matplotlib
+scikit-image
