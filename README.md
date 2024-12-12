@@ -112,7 +112,7 @@ The Streamlit app provides a simple interface for:
 2. *Prediction*: The app predicts if the image shows signs of Diabetic Retinopathy.
 3. *Visualization*: Displays the Grad-CAM heatmap for explainability.
 
-### App Interface
+### App Walkthrough
 The following screenshots demonstrate the functionality of the Streamlit app:
 
 1. *Home Page:* The app's landing page with an option to upload a retinal image.
@@ -128,6 +128,8 @@ The following screenshots demonstrate the functionality of the Streamlit app:
    
    ![PredictionandHaetmap](https://github.com/user-attachments/assets/8a65bd76-001a-41c9-917a-18fcc52dbc3c)
 
+---
+
 ## Acknowledgments
 - *Dataset*: [Diagnosis of Diabetic Retinopathy (Kaggle)](https://www.kaggle.com/datasets/pkdarabi/diagnosis-of-diabetic-retinopathy/data).
 - *Pre-trained Model*: ResNet50 from Keras Applications.
@@ -138,6 +140,8 @@ The following screenshots demonstrate the functionality of the Streamlit app:
 - Extend the application to classify multiple stages of Diabetic Retinopathy.
 - Integrate additional explainable AI techniques.
 - Deploy the application to the cloud for wider accessibility.
+
+---
 
 ## The EyeCatchers Team
 - [Fatima Noor](https://www.linkedin.com/in/fatima-nur/)
