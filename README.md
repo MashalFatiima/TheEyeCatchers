@@ -14,7 +14,7 @@ This project implements a deep learning-based approach to detect Diabetic Retino
 
 ## Dataset
 ### Data Description
-This dataset consists of a large collection of high-resolution retinal images captured under various imaging conditions. Each image is assessed by a medical professional and labeled as:
+This dataset comprises a large collection of high-resolution retinal images captured under various imaging conditions. Each image is assessed by a medical professional and labeled as:
 
 - **Diabetic Retinopathy (DR)**: 0
 - **No Diabetic Retinopathy (No_DR)**: 1
@@ -28,18 +28,25 @@ This dataset consists of a large collection of high-resolution retinal images ca
 - **Test samples**: 231
 
 ### Preprocessing
-- Images resized to `224x224` pixels.
-- Normalized pixel values to `[0, 1]`.
-- Applied data augmentation techniques like random rotation and flipping to improve generalization.
+The preprocessing pipeline includes the following steps:
+
+- **Resize:** All images are resized to 224x224 pixels to match the input size of the ResNet50 model.
+- **Normalization:** Pixel values are normalized using calculated mean and standard deviation values.
+- **To Tensor:** Images are converted to PyTorch tensors for compatibility with the deep learning model.
 
 ---
 
 ## Model
 ### Architecture
-- **Base Model**: ResNet50 (pre-trained on ImageNet).
-- **Custom Layers**: Added a dense layer for binary classification with sigmoid activation.
-- **Optimizer**: Adam (learning rate = 0.001).
-- **Loss Function**: Binary Cross-Entropy.
+- **Base Model:** ResNet50 (pre-trained on ImageNet).
+- **Feature Extraction Layers:** All pre-trained layers were frozen to retain learned features.
+- **Modified Fully Connected Layers:**
+  - Input: Features from ResNet50 (num_features = 2048).
+  - Added a dense layer with 128 neurons and ReLU activation for better learning.
+  - Dropout layer with a rate of 0.3 for regularization.
+  - Output: A dense layer with 2 neurons for binary classification (DR or No_DR).
+- **Optimizer:** Adam with a learning rate of 0.001, applied only to the modified fully connected layers.
+- **Loss Function:** CrossEntropyLoss for multi-class classification.
 
 ### Training Results
 | Epoch | Training Loss | Training Accuracy |
@@ -56,7 +63,6 @@ This dataset consists of a large collection of high-resolution retinal images ca
 | 10    | 8.1565        | 96.05%            |
 
 ### Evaluation Metrics
-- **Validation Loss**: 2.1362
 - **Validation Accuracy**: 95.86%
 - **Test Accuracy**: 96.97%
 
@@ -76,15 +82,18 @@ The Streamlit app provides a simple interface for:
 2. **Prediction**: The app predicts if the image shows signs of Diabetic Retinopathy.
 3. **Visualization**: Displays the Grad-CAM heatmap for explainability.
 
-### Running the App
+### App Interface
+The following screenshots demonstrate the functionality of the Streamlit app:
 
-4. Open the app in your browser at ``.
-
-
+1. **Home Page:** The app's landing page with an option to upload a retinal image.
+   
+3. **Image Upload:** Users can upload a retinal fundus image for prediction.
+   
+4. **Prediction and Heatmap:** Displays the prediction (DR/No_DR) along with the Grad-CAM heatmap highlighting the regions influencing the prediction.
+   
 ## Acknowledgments
-- **Dataset**: [APTOS 2019 Blindness Detection (Kaggle)](https://www.kaggle.com/c/aptos2019-blindness-detection) or Messidor-2 dataset.
+- **Dataset**: [Diagnosis of Diabetic Retinopathy (Kaggle)](https://www.kaggle.com/datasets/pkdarabi/diagnosis-of-diabetic-retinopathy/data).
 - **Pre-trained Model**: ResNet50 from Keras Applications.
-- **Grad-CAM**: Selvaraju et al.'s paper on Visual Explanations from Deep Networks.
 
 ---
 
@@ -94,7 +103,4 @@ The Streamlit app provides a simple interface for:
 - Deploy the application to the cloud for wider accessibility.
 
 ---
-
-## Contact
-For questions or collaboration opportunities, reach out at [your-email@example.com].
 
