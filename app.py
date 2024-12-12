@@ -6,7 +6,7 @@ from src.image_preprocessor import preprocess_image
 from src.predictor import predict
 
 # Load the model once when the application starts
-MODEL_PATH = "model/trained_model.pth"
+MODEL_PATH = r"C:\Users\Abdullah\Desktop\TheEyeCatchers\model"
 st.session_state.setdefault("model", load_model(MODEL_PATH))
 
 # Streamlit app
