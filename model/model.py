@@ -3,12 +3,8 @@ import torch.nn as nn
 from torchvision import models
 from utils.grad_cam import generate_grad_cam
 
-# Load the model
 def load_model():
-    # Define the class names
     class_names = {0: "DR", 1: "No_DR"}
-
-    # Load the pretrained ResNet50 model
     model = models.resnet50(pretrained=True)
     num_features = model.fc.in_features
     model.fc = nn.Sequential(
@@ -17,8 +13,6 @@ def load_model():
         nn.Dropout(0.3),
         nn.Linear(128, 2)
     )
-
-    # Load the trained weights
     try:
         state_dict = torch.load("model/model.pth", map_location=torch.device("cpu"))
         if isinstance(state_dict, dict) and "state_dict" in state_dict:
@@ -29,8 +23,7 @@ def load_model():
 
     model.eval()
     return model, class_names
-
-# Predict and visualize
+    
 def predict_and_visualize(model, input_tensor, image_path, class_names):
     with torch.no_grad():
         outputs = model(input_tensor)
@@ -39,5 +32,4 @@ def predict_and_visualize(model, input_tensor, image_path, class_names):
         predicted_label = class_names[predicted_class_idx]
 
     grad_cam_image = generate_grad_cam(model, input_tensor, image_path)
-
     return predicted_label, probabilities, grad_cam_image
