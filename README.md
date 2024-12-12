@@ -142,6 +142,6 @@ The following screenshots demonstrate the functionality of the Streamlit app:
 ## The EyeCatchers Team
 - [Fatima Noor](https://www.linkedin.com/in/fatima-nur/)
 - [Mashal Fatima](https://www.linkedin.com/in/mashalfatima/)
-- [Maryam Nawaz]()
+- [Maryam Nawaz](https://www.linkedin.com/in/maryammnawaz)
 
 ---
