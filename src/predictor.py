@@ -2,12 +2,14 @@ import torch
 
 def predict(model, input_tensor):
     """
-    Predict whether the input image has diabetic retinopathy.
+    Make a prediction using the pre-trained model.
+    Args:
+        model (torch.nn.Module): Loaded model.
+        input_tensor (torch.Tensor): Preprocessed input tensor.
     Returns:
-        0: No DR
-        1: DR detected
+        int: Prediction (0 for No DR, 1 for DR).
     """
-    with torch.no_grad():
+    with torch.no_grad():  # Disable gradient calculations
         outputs = model(input_tensor)
-        _, predicted = torch.max(outputs, 1)  # Get the index of the max log-probability
-    return predicted.item()
+        _, predicted = torch.max(outputs, 1)  # Get the class with the highest score
+        return predicted.item()  # Return as an integer
