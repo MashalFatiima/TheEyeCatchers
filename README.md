@@ -69,11 +69,11 @@ The preprocessing pipeline includes the following steps:
 ---
 
 ## Explainability
-# Grad-CAM Implementation
+### Grad-CAM Implementation
 
 Grad-CAM (Gradient-weighted Class Activation Mapping) is a method for providing visual explanations for deep learning models. This section describes how Grad-CAM was implemented in the project to enhance the explainability of predictions.
 
-### Key Features of the Grad-CAM Implementation
+#### Key Features of the Grad-CAM Implementation
 
 1. **Gradient Capture:**
    - Gradients flowing back from the output layer were captured during the backpropagation phase.
@@ -93,7 +93,7 @@ Grad-CAM (Gradient-weighted Class Activation Mapping) is a method for providing 
    - The Grad-CAM heatmap was overlaid on the original retinal image using a colormap (e.g., 'jet') for intuitive interpretation.
    - This overlay highlights the regions most influential in the model's decision-making process.
 
-# Visual Interpretability
+#### Visual Interpretability
 
 The Grad-CAM implementation provides insights into the model's predictions by emphasizing areas in the retinal image that correspond to the presence of diabetic retinopathy. This enhances trust in the AI system, particularly for clinical applications, where explainability is critical.
 
