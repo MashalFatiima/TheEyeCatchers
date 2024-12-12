@@ -139,4 +139,9 @@ The following screenshots demonstrate the functionality of the Streamlit app:
 - Integrate additional explainable AI techniques.
 - Deploy the application to the cloud for wider accessibility.
 
+## The EyeCatchers Team
+- [Fatima Noor](https://www.linkedin.com/in/fatima-nur/)
+- [Mashal Fatima](https://www.linkedin.com/in/mashalfatima/)
+- [Maryam Nawaz]()
+
 ---
