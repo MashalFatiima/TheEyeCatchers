@@ -5,19 +5,16 @@ from PIL import Image
 import matplotlib.pyplot as plt
 from skimage.transform import resize
 
-# Generate Grad-CAM heatmap
 def generate_grad_cam(model, input_tensor, image_path):
     def save_gradients(gradients):
         global grad_value
         grad_value = gradients
-
     last_conv_layer = model.layer4[2].conv3
 
     def forward_hook(module, input, output):
         global activations
         activations = output
         output.register_hook(save_gradients)
-
     last_conv_layer.register_forward_hook(forward_hook)
 
     output = model(input_tensor)
@@ -42,5 +39,4 @@ def generate_grad_cam(model, input_tensor, image_path):
     grad_cam_path = "uploads/grad_cam.jpg"
     plt.savefig(grad_cam_path, bbox_inches="tight", pad_inches=0)
     plt.close()
-
     return grad_cam_path
