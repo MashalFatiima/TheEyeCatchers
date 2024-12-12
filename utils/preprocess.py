@@ -1,6 +1,5 @@
 import torchvision.transforms as transforms
 
-# Preprocess the uploaded image
 def preprocess_image(image):
     preprocess = transforms.Compose([
         transforms.Resize((224, 224)),
