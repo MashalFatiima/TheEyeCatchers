@@ -2,6 +2,7 @@ import os
 import streamlit as st
 from PIL import Image
 import torch
+import base64
 from model.model import load_model, predict_and_visualize
 from utils.preprocess import preprocess_image
 
@@ -30,9 +31,9 @@ st.markdown(
         left: 0;
         width: 100%;
         text-align: center;
-        color: pink;
-        font-size: 14px;
-        padding: 10px 0;
+        color: #90EE90;
+        font-size: 24px;
+        padding: 15px 0;
         background-color: black;
     }
     img.logo {
@@ -48,19 +49,20 @@ st.markdown(
 model, class_names = load_model()
 
 # Title section with logo
-logo_path = "Logo.png"  # Path to your logo file
+logo_path = "C:\\Users\\Abdullah\\Desktop\\TheEyeCatchers\\Logo.png"  # Path to your logo file
 if os.path.exists(logo_path):
     with open(logo_path, "rb") as f:
         logo_image = f.read()
-    logo_base64 = st.components.v1.html(
+    logo_base64 = base64.b64encode(logo_image).decode("utf-8")
+    st.markdown(
         f"""
         <div class="title-container">
-            <img src="data:image/png;base64,{logo_image}" class="logo">
+            <img src="data:image/png;base64,{logo_base64}" class="logo">
             <h1>TheEyeCatchers</h1>
         </div>
         <h2 style="text-align: center;">Diabetic Retinopathy Detection with Grad-CAM</h2>
         """,
-        unsafe_allow_html,
+        unsafe_allow_html=True,
     )
 else:
     st.error("Logo file not found. Please ensure it's placed in the correct directory.")
@@ -97,7 +99,7 @@ if uploaded_file:
 st.markdown(
     """
     <div class="footer">
-        © Developed by Mashal, Fatima, and Maryam
+        © 2024 TheEyeCatchers: Research, Development, & Innovation
     </div>
     """,
     unsafe_allow_html=True,
