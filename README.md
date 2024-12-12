@@ -89,7 +89,7 @@ The following screenshots demonstrate the functionality of the Streamlit app:
    
 3. **Image Upload:** Users can upload a retinal fundus image for prediction.
    
-4. **Prediction and Heatmap:** Displays the prediction (DR/No_DR) along with the Grad-CAM heatmap highlighting the regions influencing the prediction.
+4. **Prediction and Heatmap:** Displays the prediction (DR / No_DR) along with the Grad-CAM heatmap highlighting the regions influencing the prediction.
    
 ## Acknowledgments
 - **Dataset**: [Diagnosis of Diabetic Retinopathy (Kaggle)](https://www.kaggle.com/datasets/pkdarabi/diagnosis-of-diabetic-retinopathy/data).
